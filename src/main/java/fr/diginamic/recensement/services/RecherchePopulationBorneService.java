@@ -48,15 +48,20 @@ public class RecherchePopulationBorneService extends MenuService {
 		int max = Integer.parseInt(saisieMax) * 1000;
 
 		List<Ville> villes = rec.getVilles();
-		if (villes.stream().filter(ville -> ville.getCodeDepartement().equals(choix)).toArray().length == 0) {
-			throw new SaisieException("Le code département saisi est invalide");
-		}
+//		if (villes.stream().filter(ville -> ville.getCodeDepartement().equals(choix)).toArray().length == 0) {
+//			throw new SaisieException("Le code département saisi est invalide");
+//		}
+		Boolean flag = false;
 		for (Ville ville : villes) {
 			if (ville.getCodeDepartement().equalsIgnoreCase(choix)) {
+				flag = true;
 				if (ville.getPopulation() >= min && ville.getPopulation() <= max) {
 					System.out.println(ville);
 				}
 			}
+		}
+		if (!flag) {
+			throw new SaisieException("Le code département saisi est invalide");
 		}
 	}
 
